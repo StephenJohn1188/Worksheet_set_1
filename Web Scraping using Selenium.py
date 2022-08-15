@@ -272,6 +272,244 @@ df=pd.DataFrame({'Rating':rating,'Title':title,'Price':price})
 df
 
 
+# # Q9. Python program to scrape the salary data for Data Scientist designation.
+
+# In[205]:
+
+
+driver=webdriver.Chrome(r"chromedriver.exe")
+
+
+# In[206]:
+
+
+driver.get("https://www.ambitionbox.com/")
+
+
+# In[207]:
+
+
+jobs=driver.find_element(By.XPATH,"/html/body/div[1]/nav[2]/div/ul/li[5]/a")
+jobs.click()
+
+
+# In[208]:
+
+
+designation=driver.find_element(By.XPATH,"/html/body/div/div/div/div[2]/div[1]/div[1]/div/div/div/div/span/input")
+designation.send_keys('Data Scientist')
+
+
+# In[209]:
+
+
+search=driver.find_element(By.XPATH,"/html/body/div/div/div/div[2]/div[1]/div[1]/div/div/div/button")
+search.click()
+
+
+# In[210]:
+
+
+select=driver.find_element(By.XPATH,"/html/body/div/div/div/div[2]/div[1]/div[2]/div[1]/div/div/div/div[2]/div[1]/i")
+select.click()
+
+
+# In[211]:
+
+
+location=driver.find_element(By.XPATH,"/html/body/div/div/div/div[2]/div[1]/div[2]/div[1]/div/div/div/div[2]/div[2]/div/div[2]/input")
+location.send_keys('Noida')
+
+
+# In[212]:
+
+
+ND=driver.find_element(By.XPATH,"/html/body/div/div/div/div[2]/div[1]/div[2]/div[1]/div/div/div/div[2]/div[2]/div/div[3]/div[1]/div[1]/div/label")
+ND.click()
+
+
+# In[213]:
+
+
+job_title=[]
+company_name=[]
+
+
+# In[214]:
+
+
+title_tags=driver.find_elements(By.XPATH,'//a[@class="title noclick"]')
+for i in title_tags[0:10]:
+    title=i.text
+    job_title.append(title)
+
+
+# In[215]:
+
+
+company_tags=driver.find_elements(By.XPATH,'//div[@class="company-info"]')
+for i in company_tags[0:10]:
+  company=i.text
+  company_name.append(company)
+
+
+# In[216]:
+
+
+print(len(job_title),len(company_name))
+
+
+# In[217]:
+
+
+df=pd.DataFrame({'Job Title':job_title,'Company Name':company_name})
+df
+
+
+# # Q10.python program to scrape the salary data for Data Scientist designation. You have to scrape Company name, Number of salaries, Average salary, Minsalary, Max Salary.
+
+# In[337]:
+
+
+driver=webdriver.Chrome(r"chromedriver.exe")
+
+
+# In[338]:
+
+
+driver.get("https://www.ambitionbox.com/")
+
+
+# In[339]:
+
+
+Select=driver.find_element(By.XPATH,"/html/body/div[1]/nav[2]/div/ul/li[3]/a")
+Select.click()
+
+
+# In[340]:
+
+
+bsalary=driver.find_element(By.XPATH,"/html/body/div[1]/nav[2]/div/ul/li[3]/div/ul/li[1]/div")
+bsalary.click()
+
+
+# In[341]:
+
+
+designation=driver.find_element(By.XPATH,"/html/body/div/div/div/main/section[1]/div[2]/div[1]/span/input")
+designation.send_keys('Data Scientist')
+
+
+# In[342]:
+
+
+dclick=driver.find_element(By.XPATH,"/html/body/div/div/div/main/section[1]/div[2]/div[1]/span/div/div/div[1]")
+dclick.click()
+
+
+# In[343]:
+
+
+Experience_Required=[]
+company_name=[]
+Total_Salary=[]
+Average=[]
+Minimum=[]
+Maximum=[]
+
+
+# In[344]:
+
+
+experience_tags=driver.find_elements(By.CLASS_NAME,'sbold-list-header')
+for i in title_tags[0:10]:
+    exp=i.text
+    Experience_Required.append(exp)
+
+
+# In[345]:
+
+
+len(Experience_Required)
+
+
+# In[346]:
+
+
+company_tags=driver.find_elements(By.XPATH,'//div[@class="company-info"]//a')
+for i in company_tags[0:10]:
+  company=i.text
+  company_name.append(company)
+
+
+# In[347]:
+
+
+avg_tags=driver.find_elements(By.XPATH,'//p[@class="averageCtc"]')
+for i in avg_tags[0:10]:
+  avg=i.text
+  Average.append(avg)
+
+
+# In[348]:
+
+
+TS_tags=driver.find_elements(By.XPATH,'//span[@class="datapoints"]')
+for i in TS_tags[0:10]:
+  TS=i.text
+  Total_Salary.append(TS)
+
+
+# In[349]:
+
+
+min_tags=driver.find_elements(By.XPATH,'//div[@class="value body-medium"]')
+for i in min_tags[0:10]:
+  min=i.text
+  Minimum.append(min)
+
+
+# In[350]:
+
+
+max_tags=driver.find_elements(By.XPATH,'//div[@class="value body-medium"]')
+for i in max_tags[0:10]:
+  max=i.text
+  Maximum.append(max)
+
+
+# In[351]:
+
+
+print(len(Experience_Required),len(company_name),len(Total_Salary),len(Minimum),len(Maximum))
+
+
+# In[353]:
+
+
+df=pd.DataFrame({'Company Name':company_name,"Total Salary Record":Total_Salary,"Maximum Salary":Maximum, "Minimum Salary":Minimum})
+df
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
 # In[ ]:
 
 
